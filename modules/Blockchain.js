@@ -1,4 +1,5 @@
 const Ethereum = require('./Blockchain/Ethereum/index.js');
+const XDai = require('./Blockchain/XDai/index.js');
 const uuidv4 = require('uuid/v4');
 const Op = require('sequelize/lib/operators');
 const deepExtend = require('deep-extend');
@@ -22,8 +23,6 @@ class Blockchain {
         this.emitter = ctx.emitter;
         this.config = ctx.config.blockchain;
         this.pluginService = ctx.blockchainPluginService;
-        this.gasStationService = ctx.gasStationService;
-        this.tracPriceService = ctx.tracPriceService;
         this.appState = ctx.appState;
 
         this.blockchain = [];
@@ -36,6 +35,9 @@ class Blockchain {
             switch (implementation_configuration.blockchain_title) {
             case 'Ethereum':
                 this.blockchain[i] = new Ethereum(ctx, implementation_configuration);
+                break;
+            case 'xDai':
+                this.blockchain[i] = new XDai(ctx, implementation_configuration);
                 break;
             default:
                 this.log.error('Unsupported blockchain', implementation_configuration.blockchain_title);
@@ -487,7 +489,7 @@ class Blockchain {
                             // eslint-disable-next-line
                             continue;
                         }
-                        eventData.finished = true;
+                        eventData.finished = 1;
                         // eslint-disable-next-line no-loop-func
                         eventData.save().then(() => {
                             clearTimeout(clearToken);
@@ -568,7 +570,7 @@ class Blockchain {
                     const dataToSend = JSON.parse(data.dataValues.data);
                     dataToSend.blockchain_id = data.dataValues.blockchain_id;
                     this.emitter.emit(`eth-${data.event}`, dataToSend);
-                    data.finished = true;
+                    data.finished = 1;
                     await data.save();
                 });
             }
@@ -633,7 +635,7 @@ class Blockchain {
                             value: JSON.parse(data.dataValues.data),
                             blockchain_id: data.blockchain_id,
                         });
-                        data.finished = true;
+                        data.finished = 1;
                         await data.save();
                     } catch (error) {
                         this.logger.error(error);

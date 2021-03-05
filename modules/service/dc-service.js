@@ -61,7 +61,7 @@ class DCService {
             message: 'Offer is pending',
             status: 'PENDING',
             global_status: 'PENDING',
-            trac_in_eth_used_for_price_calculation: offerPrice.tracInEth,
+            trac_in_base_currency_used_for_price_calculation: offerPrice.tracInBaseCurrency,
             gas_price_used_for_price_calculation: offerPrice.gasPriceInGwei,
             price_factor_used_for_price_calculation: dc_price_factor,
             blockchain_id,
@@ -480,7 +480,7 @@ class DCService {
         const distributionSignature = Encryption
             .signMessage(toSign, Utilities.normalizeHex(node_private_key));
 
-        const permissionedData = await this.permissionedDataService.getAllowedPermissionedData(
+        const permissionedData = await this.permissionedDataService.getAllowedPermissionedDataMap(
             offer.data_set_id,
             identity,
         );

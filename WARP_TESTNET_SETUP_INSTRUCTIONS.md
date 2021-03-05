@@ -123,9 +123,9 @@ There’s a minimum set of config parameters that need to be provided in order t
             "https://testnet-warp-aws-bootstrap.origintrail.network:5278/#b78edd9458c2224925fbce09d5312e82267f57d7"
         ],
         "remoteWhitelist": [
-           <remote_whitelist>
+           **remote_whitelist**
         ],
-        "hostname": "<node_hostname>"
+        "hostname": "**node_hostname**"
     },
     "initial_deposit_amount": "5000000000000000000000",
     "litigationEnabled": true,
@@ -136,8 +136,10 @@ There’s a minimum set of config parameters that need to be provided in order t
                 "network_id": "rinkeby",
                 "identity_filepath": "rinkeby_identity.json",
                 "hub_contract_address": "0x1107BDdDC52a15FA3Dd8d38A6174bBc30fc5714A",
-                "node_wallet_path": "<node_wallet_path>",
-                "rpc_server_url": "<rpc_server_url_rinkeby>",
+                "node_wallet": "**node_wallet**",
+                "node_private_key": "**node_private_key**",
+                "management_wallet": "**management_wallet**",
+                "rpc_server_url": "**rpc_server_url_rinkeby**",
                 "gas_price": "1000000000",
                 "gas_limit": "2000000"
             },
@@ -146,8 +148,10 @@ There’s a minimum set of config parameters that need to be provided in order t
                 "network_id": "kovan",
                 "identity_filepath": "kovan_identity.json",
                 "hub_contract_address": "0x8623917Fba97BdfDA15E9a175e248Cd4cC6F6f39",
-                "node_wallet_path": "<node_wallet_path>",
-                "rpc_server_url": "<rpc_server_url_kovan>",
+                "node_wallet": "**node_wallet**",
+                "node_private_key": "**node_private_key**",
+                "management_wallet": "**management_wallet**",
+                "rpc_server_url": "**rpc_server_url_kovan**",
                 "gas_price": "1000000000",
                 "gas_limit": "2000000"
             }
@@ -166,31 +170,16 @@ There’s a minimum set of config parameters that need to be provided in order t
 
 In the previously downloaded template please provide inputs for the following:
 
-1.  **<node_hostname>** - the public network address or hostname that will be used in P2P communication with other nodes for node’s self identification.
+1.  `**node_hostname**` - the public network address or hostname that will be used in P2P communication with other nodes for node’s self identification.
     
-2.  **<remote_whitelist>** - list of IPs or hosts of the machines (“host.domain.com”) that are allowed to communicate with REST API.
+2.  `**remote_whitelist**` - list of IPs or hosts of the machines (“host.domain.com”) that are allowed to communicate with REST API.
     
-3.  **<rpc_server_url_rinkeby>, <rpc_server_url_kovan>** - an URL to RPC host server, usually Infura or own hosted Geth server. For more see RPC server host
+3.  `**rpc_server_url_rinkeby**, **rpc_server_url_kovan**` - an URL to RPC host server, usually Infura or own hosted Geth server. For more see RPC server host
     
-4.  **<node_wallet_path>** - path to node wallet configuration file
+4.  `**node_wallet**`, `**node_private_key**` - operational wallet Ethereum wallet address and its private key
+
+5.  `**management_wallet**` - the management wallet for your node (note: the Management wallet private key is NOT stored on the node)
     
-
-
-For each blockchain network you should provide a wallet configuration file.
-
-  
-
-### Node wallet configuration template:
-<pre>
-{
-    "node_wallet": "0x123...",
-    "node_private_key": "1dfd...",
-    "management_wallet": "0x456..."
-}
-</pre>
-node_wallet and node_private_key - operational wallet Ethereum wallet address and its private key.
-
-management_wallet - the management wallet for your node (note: the Management wallet private key is NOT stored on the node)
 
 ## Running a node on the WARP TESTNET Network
 
@@ -199,16 +188,15 @@ Let’s just point Docker to the right image and configuration file with the fol
   
 <pre>
 docker run --log-driver json-file --log-opt max-size=1g --name=otnode 
---hostname=<node_hostname> -p 8900:8900 -p 5278:5278 -p 3000:3000 -e 
+--hostname=**node_hostname** -p 8900:8900 -p 5278:5278 -p 3000:3000 -e 
 LOGS_LEVEL_DEBUG=1 -e SEND_LOGS=1 -v ~/certs/:/ot-node/certs/ 
 -v ~/.origintrail_noderc:/ot-node/.origintrail_noderc 
--v ~/.wallets:/ot-node/data/<node_wallet_path> 
 quay.io/origintrail/otnode-test:feature_blockchain-service
 </pre>
   
 
 ### Note:
-Please make sure that your .origintrail_noderc and .wallets file is ready before running the following commands. In this example, the configuration file .origintrail_noderc and .wallets is placed into the home folder of the current user (ie. /home/ubuntu). You should point to the path where you created .origintrail_noderc and .wallets on your file system. <node_wallet_path> should be the same value as the one in the configuration.
+Please make sure that your .origintrail_noderc file is ready before running the following commands. In this example, the configuration file .origintrail_noderc is placed into the home folder of the current user (ie. /home/ubuntu). You should point to the path where you created .origintrail_noderc on your file system.
 
 ## Congratulations
 
