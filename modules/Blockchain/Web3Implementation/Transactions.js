@@ -43,6 +43,9 @@ class Transactions {
                             // Ganache's version of nonce error.
                             error.name !== 'TXRejectedError' && !error.toString().includes('the tx doesn\'t have the correct nonce.')
                         ) {
+                            console.log('**************');
+                            console.log(error);
+                            console.log('**************');
                             throw new Error(error);
                         }
 
@@ -90,7 +93,9 @@ class Transactions {
         );
 
         const transaction = new Tx(rawTx);
-
+        console.log('**************');
+        console.log('private key length: ', this.privateKey.length);
+        console.log('**************');
         transaction.sign(this.privateKey);
 
         const serializedTx = transaction.serialize().toString('hex');
