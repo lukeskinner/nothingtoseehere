@@ -48,6 +48,10 @@ fi
 cp ${NODE_RC_PATH} .origintrail_noderc_v4_backup
 echo "Old configuration saved as .origintrail_noderc_v4_backup."
 docker cp ${DOCKER_CONTAINER_NAME}:/ot-node/data/.v5_configuration ./${NODE_RC_PATH}
+
+sed -i 's/"network_id": "rinkeby"/"network_id": "ethr:rinkeby:1"/g' ${NODE_RC_PATH}
+sed -i 's/"network_id": "mainnet"/"network_id": "ethr:mainnet"/g' ${NODE_RC_PATH}
+
 echo "Starting manual node update to version 5. Please be patient this can take up to 10 minutes."
 docker exec ${DOCKER_CONTAINER_NAME} node /ot-node/current/scripts/start_v5_update.js
 if [ ! $? -eq 0 ]; then
