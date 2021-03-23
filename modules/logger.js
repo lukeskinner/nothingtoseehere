@@ -5,6 +5,12 @@ require('winston-papertrail').Papertrail;
 require('winston-loggly-bulk');
 const util = require('util');
 
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'stable' || process.env.NODE_ENV === 'staging') {
+    process.env.NODE_ENV = 'testnet';
+} else if (process.env.NODE_ENV === 'mariner') {
+    process.env.NODE_ENV = 'mainnet';
+}
+
 const runtimeConfigJson = require('../config/config.json')[process.env.NODE_ENV];
 
 const colors = require('colors/safe');

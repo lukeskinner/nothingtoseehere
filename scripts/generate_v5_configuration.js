@@ -7,7 +7,8 @@ const v5ConfigPath = '/ot-node/data/.v5_configuration';
 
 try {
     console.log('Starting configuration update');
-    const defaultConfig = defaultConfigJson[process.env.NODE_ENV];
+    const nodeEnv = process.env.NODE_ENV === 'mariner' ? 'mainnet' : process.env.NODE_ENV;
+    const defaultConfig = defaultConfigJson[nodeEnv];
     const configFile = fs.readFileSync(nodercConfigPath);
     const config = JSON.parse(configFile);
     const { blockchain } = config;

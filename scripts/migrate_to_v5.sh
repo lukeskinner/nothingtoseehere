@@ -39,6 +39,14 @@ if [ ! "$(docker ps -a --filter status=running | grep $DOCKER_CONTAINER_NAME)" ]
     exit 0
 fi
 
+curl -O https://raw.githubusercontent.com/OriginTrail/ot-node/feature/update-migrate-script/scripts/generate_v5_configuration.js
+curl -O https://raw.githubusercontent.com/OriginTrail/ot-node/feature/update-migrate-script/scripts/start_v5_update.js
+curl -O https://raw.githubusercontent.com/OriginTrail/ot-node/feature/update-migrate-script/modules/logger.js
+
+docker cp generate_v5_configuration.js $DOCKER_CONTAINER_NAME:/ot-node/current/scripts/generate_v5_configuration.js
+docker cp start_v5_update.js $DOCKER_CONTAINER_NAME:/ot-node/current/scripts/start_v5_update.js
+docker cp logger.js $DOCKER_CONTAINER_NAME:/ot-node/current/modules/logger.js
+
 docker exec ${DOCKER_CONTAINER_NAME} node /ot-node/current/scripts/generate_v5_configuration.js
 if [ ! $? -eq 0 ]; then
     echo "Failed to generate v5 configuration file"

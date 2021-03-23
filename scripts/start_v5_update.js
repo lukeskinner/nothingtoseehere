@@ -7,7 +7,8 @@ const rc = require('rc');
 const pjson = require('../package.json');
 const configjson = require('../config/config.json');
 
-const defaultConfig = configjson[process.env.NODE_ENV];
+const nodeEnv = process.env.NODE_ENV === 'mariner' ? 'mainnet' : process.env.NODE_ENV;
+const defaultConfig = configjson[nodeEnv];
 const config = rc(pjson.name, defaultConfig);
 
 const updateFilepath = '/ot-node/current/UPDATE';
