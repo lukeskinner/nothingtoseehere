@@ -99,7 +99,7 @@ class DhReplicationImportCommand extends Command {
             .then(() => this.updateBidData(offerId))
             .then(() => this.commandExecutor.add({
                 name: 'dhOfferFinalizedCommand',
-                deadline_at: Date.now() + (60 * 60 * 1000), // One hour.
+                deadline_at: Date.now() + this.config.dc_choose_time,
                 period: 10 * 1000,
                 data: {
                     offerId,
