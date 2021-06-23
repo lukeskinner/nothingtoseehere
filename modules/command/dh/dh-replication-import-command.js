@@ -127,7 +127,7 @@ class DhReplicationImportCommand extends Command {
         const {
             offerId,
         } = command.data;
-
+        this.logger.error('Unable to import replication data, error: ', err);
         const bid = await Models.bids.findOne({ where: { offer_id: offerId } });
         bid.status = 'FAILED';
         await bid.save({ fields: ['status'] });
