@@ -1,5 +1,4 @@
 const constants = require('../constants');
-const BN = require('bn.js');
 
 const minutesInDay = 60 * 24;
 
