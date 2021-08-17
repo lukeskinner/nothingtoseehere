@@ -113,7 +113,10 @@ class DhReplicationImportCommand extends Command {
                     offerId,
                     blockchain_id,
                 },
-            }));
+            }))
+            .catch((error) => {
+                this.logger.error('[TEST]Error while validation replication: ', error.message);
+            });
         return Command.empty();
     }
 
@@ -182,10 +185,13 @@ class DhReplicationImportCommand extends Command {
         this.logger.trace('Validating litigation hash.');
         let sortedDataset =
             OtJsonUtilities.prepareDatasetForGeneratingLitigationProof(otJson);
+        this.logger.info('[TEST]Dataset sorted for generating litigation proof');
         if (!sortedDataset) {
             sortedDataset = otJson;
         }
+        this.logger.info('[TEST]Get litigation root hash called from challenge service.');
         const encryptedGraphRootHash = this.challengeService.getLitigationRootHash(sortedDataset['@graph']);
+        this.logger.info('[TEST]Encrypted graph root hash generated.');
         if (encryptedGraphRootHash !== litigationRootHash) {
             throw Error(`Calculated distribution hash ${encryptedGraphRootHash} differs from DC distribution hash ${litigationRootHash}`);
         }
@@ -199,6 +205,7 @@ class DhReplicationImportCommand extends Command {
         dcNodeId,
         blockchain_id,
     ) {
+        this.logger.info('[TEST]Updating permissioned data.');
         this.permissionedDataService.attachPermissionedDataToGraph(
             decryptedDataset['@graph'],
             permissionedData,
@@ -254,6 +261,7 @@ class DhReplicationImportCommand extends Command {
     }
 
     async importDataset(decryptedDataset, encryptedMap, documentPath) {
+        this.logger.info('[TEST]Importing replicated dataset.');
         const importResult = await this.importService.importFile({
             document: decryptedDataset,
             encryptedMap,
@@ -274,6 +282,7 @@ class DhReplicationImportCommand extends Command {
         dcWallet,
         blockchainId,
     ) {
+        this.logger.info('[TEST]Updating data info.');
         let dataInfo = await Models.data_info.findOne({
             where: {
                 data_set_id: dataSetId,
@@ -311,6 +320,7 @@ class DhReplicationImportCommand extends Command {
      * @returns {Promise<void>}
      */
     async sendReplicationFinishedMessage(offerId, dcNodeId, color, blockchainId) {
+        this.logger.info('[TEST]Sending replication finished message.');
         const dhIdentity = this.profileService.getIdentity(blockchainId);
         const toSign = [
             Utilities.denormalizeHex(offerId),

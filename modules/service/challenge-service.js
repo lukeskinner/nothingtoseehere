@@ -2,6 +2,7 @@ const constants = require('../constants');
 const importUtilities = require('../ImportUtilities');
 const Merkle = require('../Merkle');
 const utilities = require('../Utilities');
+const logger = require('./../logger');
 
 class ChallengeService {
     /**
@@ -142,7 +143,9 @@ class ChallengeService {
         blockSizeInBytes = constants.DEFAULT_CHALLENGE_BLOCK_SIZE_BYTES,
     ) {
         const blocks = this.getBlocks(encryptedGraphData, blockSizeInBytes);
+        logger.info('[TEST]Blocks fetched. generating Merkle tree');
         const litigationMerkleTree = new Merkle(blocks, 'litigation');
+        logger.info('[TEST]Merkle tree generated');
         return litigationMerkleTree.getRoot();
     }
 
