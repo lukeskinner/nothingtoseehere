@@ -1,0 +1,71 @@
+{
+  "findLowEstimatedValueDatasetsData": {
+    "data_info": [
+      {
+        "data_set_id": "data_set_id_1",
+        "import_timestamp": "1"
+      },
+      {
+        "data_set_id": "data_set_id_2",
+        "import_timestamp": "1"
+      },
+      {
+        "data_set_id": "data_set_id_3",
+        "import_timestamp": "1"
+      },
+      {
+        "data_set_id": "data_set_id_4",
+        "import_timestamp": "1"
+      },
+      {
+        "data_set_id": "data_set_id_5",
+        "import_timestamp": "1"
+      },
+      {
+        "data_set_id": "data_set_id_6",
+        "import_timestamp": "1"
+      }
+    ],
+    "bids": [
+      {
+        "data_set_id": "data_set_id_1",
+        "holding_time_in_minutes": "1"
+      },
+      {
+        "data_set_id": "data_set_id_4",
+        "holding_time_in_minutes": "2"
+      },
+      {
+        "data_set_id": "data_set_id_4",
+        "holding_time_in_minutes": "3"
+      },
+      {
+        "data_set_id": "data_set_id_5",
+        "holding_time_in_minutes": "3"
+      },
+      {
+        "data_set_id": "data_set_id_6",
+        "holding_time_in_minutes": "3"
+      }
+    ],
+    "offers": [
+      {
+        "data_set_id": "data_set_id_2"
+      },
+      {
+        "data_set_id": "data_set_id_5"
+      },
+      {
+        "data_set_id": "data_set_id_6"
+      }
+    ],
+    "purchased_data": [
+      {
+        "data_set_id": "data_set_id_3"
+      },
+      {
+        "data_set_id": "data_set_id_6"
+      }
+    ]
+  }
+}
