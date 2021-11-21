@@ -72,21 +72,22 @@ class DCOfferFinalizeCommand extends Command {
             },
         );
         let result;
+        this.logger.warn('Blocked finalize of job.');
         try {
             // todo pass blockchain identity
-            result = await this.blockchain.finalizeOffer(
-                this.profileService.getIdentity(blockchain_id),
-                offerId,
-                new BN(solution.shift, 10),
-                confirmations[0],
-                confirmations[1],
-                confirmations[2],
-                colors,
-                nodeIdentifiers,
-                parentIdentity,
-                urgent,
-                blockchain_id,
-            ).response;
+            // result = await this.blockchain.finalizeOffer(
+            //     this.profileService.getIdentity(blockchain_id),
+            //     offerId,
+            //     new BN(solution.shift, 10),
+            //     confirmations[0],
+            //     confirmations[1],
+            //     confirmations[2],
+            //     colors,
+            //     nodeIdentifiers,
+            //     parentIdentity,
+            //     urgent,
+            //     blockchain_id,
+            // ).response;
         } catch (error) {
             if (error.message.includes('Gas price higher than maximum allowed price')) {
                 const delay = constants.GAS_PRICE_VALIDITY_TIME_IN_MILLS / 60 / 1000;
@@ -109,9 +110,9 @@ class DCOfferFinalizeCommand extends Command {
             }
             throw error;
         }
-        const offer = await Models.offers.findOne({ where: { offer_id: offerId } });
-        offer.offer_finalize_transaction_hash = result.transactionHash;
-        await offer.save({ fields: ['offer_finalize_transaction_hash'] });
+        // const offer = await Models.offers.findOne({ where: { offer_id: offerId } });
+        // offer.offer_finalize_transaction_hash = result.transactionHash;
+        // await offer.save({ fields: ['offer_finalize_transaction_hash'] });
 
         await Models.handler_ids.update({ timestamp: Date.now() }, { where: { handler_id } });
 
