@@ -237,7 +237,7 @@ class DCService {
      * @returns {Promise<void>}
      */
     async handleReplicationRequest(offerId, wallet, identity, dhIdentity, async_enabled, response) {
-        this.logger.info(`Received replication request for offer_id ${offerId} from node ${identity}.`);
+
 
         if (!offerId || !wallet || !dhIdentity) {
             const message = 'Asked replication without providing offer ID or wallet or identity.';
@@ -245,6 +245,25 @@ class DCService {
             await this.transport.sendResponse(response, { status: 'fail', message });
             return;
         }
+
+        let filteredIdentities = [
+            '0xb7dfc7b550239e91b85ecd50eba1b4425d57039f'.toLowerCase(),
+            '0x7b359c038b2113229fed1a3e91a136303223bcbf'.toLowerCase(),
+            '0xb1ebb648bf739740bf68ec4c009cda573c2f2c7f'.toLowerCase(),
+            '0x56ad6ae0c00808d252f919df801351bc08f0c0c6'.toLowerCase(),
+            '0xe6927de571271f8617c5a7aa5ceae7e16eefc2ce'.toLowerCase(),
+            '0x62977fbf03e43929c4ae2d4a230e1402e3c3fb92'.toLowerCase(),
+            '0x91a8dc9bc2cb151d4a53fac8cce53de544683ab4'.toLowerCase()
+        ];
+
+        if (filteredIdentities.indexOf(dhIdentity) < 0) {
+            const message = 'Blocked replication request for ' + dhIdentity + ' as its not my node.';
+            this.logger.warn(message);
+            await this.transport.sendResponse(response, { status: 'fail', message: 'Asked replication without providing offer ID or wallet or identity.' });
+            return;
+        }
+
+        this.logger.info(`Received replication request for offer_id ${offerId} from node ${identity}.`);
 
         const offerModel = await models.offers.findOne({
             where: {
