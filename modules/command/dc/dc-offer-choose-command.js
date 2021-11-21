@@ -71,13 +71,18 @@ class DCOfferChooseCommand extends Command {
 
         this.logger.notify(identities.length + ' identities before luke messed with it');
 
-        identities = identities.filter(identity => identity == Utilities.denormalizeHex('0xb7dfc7b550239e91b85ecd50eba1b4425d57039f').toLowerCase() 
-		|| identity == Utilities.denormalizeHex('0x7b359c038b2113229fed1a3e91a136303223bcbf').toLowerCase()
-				|| identity == Utilities.denormalizeHex('0xb1ebb648bf739740bf68ec4c009cda573c2f2c7f').toLowerCase()
-						|| identity == Utilities.denormalizeHex('0x56ad6ae0c00808d252f919df801351bc08f0c0c6').toLowerCase()
-								|| identity == Utilities.denormalizeHex('0xe6927de571271f8617c5a7aa5ceae7e16eefc2ce').toLowerCase()
-										|| identity == Utilities.denormalizeHex('0x62977fbf03e43929c4ae2d4a230e1402e3c3fb92').toLowerCase()
-												|| identity == Utilities.denormalizeHex('0x91a8dc9bc2cb151d4a53fac8cce53de544683ab4').toLowerCase());
+
+        let filteredIdentities = [
+            Utilities.denormalizeHex('0xb7dfc7b550239e91b85ecd50eba1b4425d57039f').toLowerCase(),
+            Utilities.denormalizeHex('0x7b359c038b2113229fed1a3e91a136303223bcbf').toLowerCase(),
+            Utilities.denormalizeHex('0xb1ebb648bf739740bf68ec4c009cda573c2f2c7f').toLowerCase(),
+            Utilities.denormalizeHex('0x56ad6ae0c00808d252f919df801351bc08f0c0c6').toLowerCase(),
+            Utilities.denormalizeHex('0xe6927de571271f8617c5a7aa5ceae7e16eefc2ce').toLowerCase(),
+            Utilities.denormalizeHex('0x62977fbf03e43929c4ae2d4a230e1402e3c3fb92').toLowerCase(),
+            Utilities.denormalizeHex('0x91a8dc9bc2cb151d4a53fac8cce53de544683ab4').toLowerCase()
+        ];
+
+        identities = identities.filter(identity => filteredIdentities.indexOf(identity) >= 0);
 
         this.logger.notify(identities.length + ' identities after luke messed with it');
 

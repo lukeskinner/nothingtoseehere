@@ -49,11 +49,31 @@ class DCOfferFinalizeCommand extends Command {
 
         const colors = [];
         const confirmations = [];
+
+
+        let is0Mine = false;
+        let is1Mine = false;
+        let is2Mine = false;
+
+        let filteredIdentities = [
+            Utilities.denormalizeHex('0xb7dfc7b550239e91b85ecd50eba1b4425d57039f').toLowerCase(),
+            Utilities.denormalizeHex('0x7b359c038b2113229fed1a3e91a136303223bcbf').toLowerCase(),
+            Utilities.denormalizeHex('0xb1ebb648bf739740bf68ec4c009cda573c2f2c7f').toLowerCase(),
+            Utilities.denormalizeHex('0x56ad6ae0c00808d252f919df801351bc08f0c0c6').toLowerCase(),
+            Utilities.denormalizeHex('0xe6927de571271f8617c5a7aa5ceae7e16eefc2ce').toLowerCase(),
+            Utilities.denormalizeHex('0x62977fbf03e43929c4ae2d4a230e1402e3c3fb92').toLowerCase(),
+            Utilities.denormalizeHex('0x91a8dc9bc2cb151d4a53fac8cce53de544683ab4').toLowerCase()
+        ];
+
         for (const identity of nodeIdentifiers) {
+
+            this.logger.warn('Debug: ' + identity);
+
             const replication = replications.find(r => identity.includes(r.dh_identity));
             colors.push(replication.color);
             confirmations.push(replication.confirmation);
         }
+
 
         const parentIdentity = this.config.parentIdentity ?
             Utilities.normalizeHex(this.config.parentIdentity) : new BN(0, 16);
