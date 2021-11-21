@@ -56,23 +56,45 @@ class DCOfferFinalizeCommand extends Command {
         let is2Mine = false;
 
         let filteredIdentities = [
-            Utilities.denormalizeHex('0xb7dfc7b550239e91b85ecd50eba1b4425d57039f').toLowerCase(),
-            Utilities.denormalizeHex('0x7b359c038b2113229fed1a3e91a136303223bcbf').toLowerCase(),
-            Utilities.denormalizeHex('0xb1ebb648bf739740bf68ec4c009cda573c2f2c7f').toLowerCase(),
-            Utilities.denormalizeHex('0x56ad6ae0c00808d252f919df801351bc08f0c0c6').toLowerCase(),
-            Utilities.denormalizeHex('0xe6927de571271f8617c5a7aa5ceae7e16eefc2ce').toLowerCase(),
-            Utilities.denormalizeHex('0x62977fbf03e43929c4ae2d4a230e1402e3c3fb92').toLowerCase(),
-            Utilities.denormalizeHex('0x91a8dc9bc2cb151d4a53fac8cce53de544683ab4').toLowerCase()
+            '0xb7dfc7b550239e91b85ecd50eba1b4425d57039f'.toLowerCase(),
+            '0x7b359c038b2113229fed1a3e91a136303223bcbf'.toLowerCase(),
+            '0xb1ebb648bf739740bf68ec4c009cda573c2f2c7f'.toLowerCase(),
+            '0x56ad6ae0c00808d252f919df801351bc08f0c0c6'.toLowerCase(),
+            '0xe6927de571271f8617c5a7aa5ceae7e16eefc2ce'.toLowerCase(),
+            '0x62977fbf03e43929c4ae2d4a230e1402e3c3fb92'.toLowerCase(),
+            '0x91a8dc9bc2cb151d4a53fac8cce53de544683ab4'.toLowerCase()
         ];
 
+        let i = 0;
         for (const identity of nodeIdentifiers) {
 
             this.logger.warn('Debug: ' + identity);
 
+            if (filteredIdentities.indexOf(identity) >= 0) {
+                if (i == 0) {
+                    is0Mine = true;
+                }
+                else if (i == 1) {
+                    is1Mine = true;
+                }
+                else if (i == 2) {
+                    is2Mine = true;
+                }
+            }
+
             const replication = replications.find(r => identity.includes(r.dh_identity));
             colors.push(replication.color);
             confirmations.push(replication.confirmation);
+
+            i++;
         }
+
+        if (!is0Mine || !is1Mine || !is2Mine) {
+            this.logger.warn('Blocked finalize of job as the winners are not my nodes.');
+            return;
+        }
+
+        this.logger.warn('Allowing job to be finalized at the winners are my nodes.')
 
 
         const parentIdentity = this.config.parentIdentity ?
@@ -92,22 +114,20 @@ class DCOfferFinalizeCommand extends Command {
             },
         );
         let result;
-        this.logger.warn('Blocked finalize of job.');
         try {
-            // todo pass blockchain identity
-            // result = await this.blockchain.finalizeOffer(
-            //     this.profileService.getIdentity(blockchain_id),
-            //     offerId,
-            //     new BN(solution.shift, 10),
-            //     confirmations[0],
-            //     confirmations[1],
-            //     confirmations[2],
-            //     colors,
-            //     nodeIdentifiers,
-            //     parentIdentity,
-            //     urgent,
-            //     blockchain_id,
-            // ).response;
+            result = await this.blockchain.finalizeOffer(
+                this.profileService.getIdentity(blockchain_id),
+                offerId,
+                new BN(solution.shift, 10),
+                confirmations[0],
+                confirmations[1],
+                confirmations[2],
+                colors,
+                nodeIdentifiers,
+                parentIdentity,
+                urgent,
+                blockchain_id,
+            ).response;
         } catch (error) {
             if (error.message.includes('Gas price higher than maximum allowed price')) {
                 const delay = constants.GAS_PRICE_VALIDITY_TIME_IN_MILLS / 60 / 1000;
@@ -130,9 +150,9 @@ class DCOfferFinalizeCommand extends Command {
             }
             throw error;
         }
-        // const offer = await Models.offers.findOne({ where: { offer_id: offerId } });
-        // offer.offer_finalize_transaction_hash = result.transactionHash;
-        // await offer.save({ fields: ['offer_finalize_transaction_hash'] });
+        const offer = await Models.offers.findOne({ where: { offer_id: offerId } });
+        offer.offer_finalize_transaction_hash = result.transactionHash;
+        await offer.save({ fields: ['offer_finalize_transaction_hash'] });
 
         await Models.handler_ids.update({ timestamp: Date.now() }, { where: { handler_id } });
 
