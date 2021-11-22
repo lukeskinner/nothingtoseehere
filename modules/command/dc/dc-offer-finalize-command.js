@@ -55,15 +55,22 @@ class DCOfferFinalizeCommand extends Command {
         let is1Mine = false;
         let is2Mine = false;
 
+
         let filteredIdentities = [
-            '0xb7dfc7b550239e91b85ecd50eba1b4425d57039f'.toLowerCase(),
-            '0x7b359c038b2113229fed1a3e91a136303223bcbf'.toLowerCase(),
-            '0xb1ebb648bf739740bf68ec4c009cda573c2f2c7f'.toLowerCase(),
-            '0x56ad6ae0c00808d252f919df801351bc08f0c0c6'.toLowerCase(),
-            '0xe6927de571271f8617c5a7aa5ceae7e16eefc2ce'.toLowerCase(),
-            '0x62977fbf03e43929c4ae2d4a230e1402e3c3fb92'.toLowerCase(),
-            '0x91a8dc9bc2cb151d4a53fac8cce53de544683ab4'.toLowerCase()
+            '0xB9712dbeD9769ED25500Eb2e123472a86f45e6F7'.toLowerCase(),
+            '0x6fa67d02fFdFe5c76E701dca07234A0C1c72f06B'.toLowerCase(),
+            '0x85101Dc7B44268587ADf01431d9f69513CCe35Ba'.toLowerCase(),
+            '0x9bc66a5e01fbfcb3e804cc60ad80ddc84ee17024'.toLowerCase(),
+            '0x6b57c811ad9961fb8c576b9be26f1e790e6085f0'.toLowerCase(),
+            '0xe6144Aa347baC9597C8e26451EDEf6EA086B664C'.toLowerCase(),
+            '0xd4Ba0E7BaBAbBdbA3ccC69c94186A2e33E3f455D'.toLowerCase(),
+            '0xE4dC8Ae17F204a8c33C9ab51cA6F6d9a7cec1EEE'.toLowerCase(),
+            '0x35C0b09278973cf757A0467e16F2A0cFa17a3403'.toLowerCase(),
+            '0x1350eAdED80b62C616Cf96F168612260eC8Dd8b2'.toLowerCase()
         ];
+
+
+        
 
         let i = 0;
         for (const identity of nodeIdentifiers) {

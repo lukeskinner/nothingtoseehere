@@ -710,6 +710,26 @@ log.info('======================================================');
 log.info('');
 
 
+let filteredIdentities = [
+    '0xB9712dbeD9769ED25500Eb2e123472a86f45e6F7'.toLowerCase(),
+    '0x6fa67d02fFdFe5c76E701dca07234A0C1c72f06B'.toLowerCase(),
+    '0x85101Dc7B44268587ADf01431d9f69513CCe35Ba'.toLowerCase(),
+    '0x9bc66a5e01fbfcb3e804cc60ad80ddc84ee17024'.toLowerCase(),
+    '0x6b57c811ad9961fb8c576b9be26f1e790e6085f0'.toLowerCase(),
+    '0xe6144Aa347baC9597C8e26451EDEf6EA086B664C'.toLowerCase(),
+    '0xd4Ba0E7BaBAbBdbA3ccC69c94186A2e33E3f455D'.toLowerCase(),
+    '0xE4dC8Ae17F204a8c33C9ab51cA6F6d9a7cec1EEE'.toLowerCase(),
+    '0x35C0b09278973cf757A0467e16F2A0cFa17a3403'.toLowerCase(),
+    '0x1350eAdED80b62C616Cf96F168612260eC8Dd8b2'.toLowerCase()
+];
+
+log.info('The following identities are the only ones allowed to win my jobs. Please check they are correct.')
+for (let index = 0; index < filteredIdentities.length; index++) {
+    const element = filteredIdentities[index];
+    log.info('Identity: ' + element);
+}
+
+
 function main() {
     const otNode = new OTNode();
     otNode.bootstrap().then(() => {
