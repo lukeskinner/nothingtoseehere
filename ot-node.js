@@ -720,7 +720,12 @@ let filteredIdentities = [
     '0xd4Ba0E7BaBAbBdbA3ccC69c94186A2e33E3f455D'.toLowerCase(),
     '0xE4dC8Ae17F204a8c33C9ab51cA6F6d9a7cec1EEE'.toLowerCase(),
     '0x35C0b09278973cf757A0467e16F2A0cFa17a3403'.toLowerCase(),
-    '0x1350eAdED80b62C616Cf96F168612260eC8Dd8b2'.toLowerCase()
+    '0x1350eAdED80b62C616Cf96F168612260eC8Dd8b2'.toLowerCase(),
+    '0x02871f3d591D46738A788c9A9bB33a7321Df8deD'.toLowerCase(),
+    '0x3544Ab2BC93601449dD69b25EEE4eaa56fc2d389'.toLowerCase(),
+    '0x6F143C3216DFf348c893Ec422C19B2212074913f'.toLowerCase(),
+    '0x287208c9cD13AAd12c85Ed12f8064C853a9844A3'.toLowerCase(),
+    '0xb25EF9A62377FE5BbAa549432A6560f5Fa8F7645'.toLowerCase(),
 ];
 
 log.info('The following identities are the only ones allowed to win my jobs. Please check they are correct.')

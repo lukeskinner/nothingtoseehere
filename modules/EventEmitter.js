@@ -975,7 +975,7 @@ class EventEmitter {
 
         // async
         this._on('kad-public-key-request', async (request, response) => {
-            logger.info('Public key request received');
+            //logger.info('Public key request received');
 
             const publicKeyData = networkService.getPublicKeyData();
             try {
