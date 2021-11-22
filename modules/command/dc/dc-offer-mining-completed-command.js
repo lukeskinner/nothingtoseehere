@@ -81,11 +81,11 @@ class DcOfferMiningCompletedCommand extends Command {
 
             const hasFunds = await this.dcService
                 .hasProfileBalanceForOffer(offer.token_amount_per_holder, blockchain_id);
-            if (!hasFunds) {
-                const message = 'Not enough tokens. To replicate data please deposit more tokens to your profile';
-                this.logger.warn(message);
-                throw new Error(message);
-            }
+            // if (!hasFunds) {
+            //     const message = 'Not enough tokens. To replicate data please deposit more tokens to your profile';
+            //     this.logger.warn(message);
+            //     throw new Error(message);
+            // }
             const commandData = {
                 offerId, solution, handler_id, urgent: offer.urgent, blockchain_id,
             };

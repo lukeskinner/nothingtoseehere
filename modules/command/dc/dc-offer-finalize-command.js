@@ -172,9 +172,9 @@ class DCOfferFinalizeCommand extends Command {
 
         const hasFunds = await this.dcService
             .hasProfileBalanceForOffer(offer.token_amount_per_holder);
-        if (!hasFunds) {
-            errorMessage = 'Not enough tokens. To replicate data please deposit more tokens to your profile';
-        }
+        // if (!hasFunds) {
+        //     errorMessage = 'Not enough tokens. To replicate data please deposit more tokens to your profile';
+        // }
         err.message = errorMessage;
         return this.invalidateOffer(command, err);
     }

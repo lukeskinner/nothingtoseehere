@@ -92,11 +92,11 @@ class DCOfferPrepareCommand extends Command {
         } else {
             const hasFunds = await this.dcService
                 .hasProfileBalanceForOffer(command.data.tokenAmountPerHolder, blockchain_id);
-            if (!hasFunds) {
-                const message = 'Not enough tokens. To replicate data please deposit more tokens to your profile';
-                this.logger.warn(message);
-                throw new Error(message);
-            }
+            // if (!hasFunds) {
+            //     const message = 'Not enough tokens. To replicate data please deposit more tokens to your profile';
+            //     this.logger.warn(message);
+            //     throw new Error(message);
+            // }
         }
 
         const handler_data = {
