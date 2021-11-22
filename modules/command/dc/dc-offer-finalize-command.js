@@ -72,6 +72,21 @@ class DCOfferFinalizeCommand extends Command {
             '0x6F143C3216DFf348c893Ec422C19B2212074913f'.toLowerCase(),
             '0x287208c9cD13AAd12c85Ed12f8064C853a9844A3'.toLowerCase(),
             '0xb25EF9A62377FE5BbAa549432A6560f5Fa8F7645'.toLowerCase(),
+            '0xF5F8E9aA431a3fD6c38bc378Db30072296fe68F2'.toLowerCase(),
+            '0x945061816d0e6163bA79F52E45E779A7B3808aEC'.toLowerCase(),
+            '0x9A36Ede7d5D501F4Ad80A349a53E3BAB05fF3c2B'.toLowerCase(),
+            '0x2525ffc8C8F5C4322bb4174744c63D846059968D'.toLowerCase(),
+            '0xF3c9EC4eFbfca36c7d3Ec6aE597d36287c88E24b'.toLowerCase(),
+            '0xcB3CD80B51C39369C48532d656c4a03ACDd54F16'.toLowerCase(),
+            '0x76E255AFD526d5fd4a8b2D4C0B5b89E92bf1A95b'.toLowerCase(),
+            '0x72E4324C780052bB3fe85aa1A01c0917cFD805f6'.toLowerCase(),
+            '0x37F9e663981349d3bc0B5833b5Dc65d3a9a43311'.toLowerCase(),
+            '0x2d5999924eCa5b0c2909aAcACD3041C84C818699'.toLowerCase(),
+            '0x96673292B332F21958e2E85599E76972F4996A35'.toLowerCase(),
+            '0xC1Ab1960dE02C376058C764ee0ECE0392c5fedeA'.toLowerCase(),
+            '0x0B1F24cc1aEE95e27724300B987824A290A7243f'.toLowerCase(),
+            '0x6c123C1eF89BCa0725B573948F44B095dFe563F1'.toLowerCase(),
+            '0xd3AA0D7e07BfEE76c7D572CDf8609a07a6Cd0C5e'.toLowerCase()
         ];
 
 
