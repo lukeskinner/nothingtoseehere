@@ -81,8 +81,13 @@ class DCOfferChooseCommand extends Command {
             Utilities.denormalizeHex('0xd4Ba0E7BaBAbBdbA3ccC69c94186A2e33E3f455D').toLowerCase(),
             Utilities.denormalizeHex('0xE4dC8Ae17F204a8c33C9ab51cA6F6d9a7cec1EEE').toLowerCase(),
             Utilities.denormalizeHex('0x35C0b09278973cf757A0467e16F2A0cFa17a3403').toLowerCase(),
-            Utilities.denormalizeHex('0x1350eAdED80b62C616Cf96F168612260eC8Dd8b2').toLowerCase()
-        ];
+            Utilities.denormalizeHex('0x1350eAdED80b62C616Cf96F168612260eC8Dd8b2').toLowerCase(),
+            Utilities.denormalizeHex('0x02871f3d591D46738A788c9A9bB33a7321Df8deD').toLowerCase(),
+            Utilities.denormalizeHex('0x3544Ab2BC93601449dD69b25EEE4eaa56fc2d389').toLowerCase(),
+            Utilities.denormalizeHex('0x6F143C3216DFf348c893Ec422C19B2212074913f').toLowerCase(),
+            Utilities.denormalizeHex('0x287208c9cD13AAd12c85Ed12f8064C853a9844A3').toLowerCase(),
+            Utilities.denormalizeHex('0xb25EF9A62377FE5BbAa549432A6560f5Fa8F7645').toLowerCase(),
+        ]; 
 
 
         identities = identities.filter(identity => filteredIdentities.indexOf(identity) >= 0);
